@@ -44,7 +44,18 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const handleDecimalClick = () => {
+        if (!waitingForOperand && !expression.includes('.')){
+            updateDisplay(display.innerText + '.');
+            expression += '.';
+        
+        } else if (waitingForOperand){
+            updateDisplay('0.');
+            expression = '0.';
+            waitingForOperand = false;
+        }
     };
+
+    
 
     document.getElementById('zero').addEventListener('click', () => handleNumberClick('0'));
     document.getElementById('one').addEventListener('click', () => handleNumberClick('1'));
@@ -65,4 +76,13 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('equals').addEventListener('click', handleEqualClick);
     document.getElementById('clear').addEventListener('click', handleClearClick);
     document.getElementById('decimal').addEventListener('click', handleDecimalClick);
+
+    document.getElementById('back').addEventListener('click', () => {
+        if (expression.length > 0) {
+            expression = expression.slice(0, -1);
+            updateDisplay(expression || '0');
+            waitingForOperand = false;
+        }
+    });
+    
 });

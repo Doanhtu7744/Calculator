@@ -27,6 +27,16 @@
     border-radius: 5px;
     cursor: pointer; 
   }
+
+  #clear {
+    grid-column: span 2;
+    background-color: rgb(0, 68, 102);
+}
+
+#equals {
+    grid-column: span 2;
+    background-color: rgb(0, 68, 102);
+}
  
   
   button:active {
