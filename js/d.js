@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const display = document.getElementById('display');
     let expression = '';
     let waitingForOperand = false;
+    const clickSound = document.getElementById('audio-click');
 
     const updateDisplay = (value) => {
         display.innerText = value;
@@ -18,7 +19,9 @@ document.addEventListener('DOMContentLoaded', () => {
             updateDisplay(display.innerText + number);
         }
         expression += number;
+        clickSound.play();
     };
+    
 
     const handleOperatorClick = (operator) => {
         if (waitingForOperand) {
@@ -28,20 +31,26 @@ document.addEventListener('DOMContentLoaded', () => {
          
         }
         updateDisplay(operator);
+        clickSound.play();
     };
+    
 
     const handleEqualClick = () => {
         console.log(expression);
             const result = eval(expression);
             updateDisplay(result);
         waitingForOperand = true;
+        clickSound.play();
     };
+    
 
     const handleClearClick = () => {
         expression = '';
         updateDisplay('0');
         waitingForOperand = false;
+        clickSound.play();
     };
+    
 
     const handleDecimalClick = () => {
         if (!waitingForOperand && !expression.includes('.')){
@@ -53,7 +62,9 @@ document.addEventListener('DOMContentLoaded', () => {
             expression = '0.';
             waitingForOperand = false;
         }
+        clickSound.play();
     };
+    
 
     
 
@@ -83,6 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
             updateDisplay(expression || '0');
             waitingForOperand = false;
         }
+        clickSound.play();
     });
-    
+
 });
